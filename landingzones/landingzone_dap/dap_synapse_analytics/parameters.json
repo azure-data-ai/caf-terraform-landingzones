@@ -1,0 +1,80 @@
+{
+    "parameters": {
+        "name": {
+            "value": "tempsynapsewkspc"
+        },
+        "location": {
+            "value": "southeastasia"
+        },
+        "defaultDataLakeStorageAccountName": {
+            "value": "rsstoragedemofs"
+        },
+        "defaultDataLakeStorageFilesystemName": {
+            "value": "container-1"
+        },
+        "sqlAdministratorLogin": {
+            "value": "sqladminuser"
+        },
+        "sqlAdministratorLoginPassword": {
+            "value": null
+        },
+        "setWorkspaceIdentityRbacOnStorageAccount": {
+            "value": true
+        },
+        "allowAllConnections": {
+            "value": true
+        },
+        "grantWorkspaceIdentityControlForSql": {
+            "value": "Enabled"
+        },
+        "managedVirtualNetwork": {
+            "value": "default"
+        },
+        "tagValues": {
+            "value": {
+                "Type": "Data Warehouse",
+                "environment": "DEV",
+                "Alias": "myproject"
+            }
+        },
+        "storageSubscriptionID": {
+            "value": "554ea54f-e23b-400a-959a-3dc723072984"
+        },
+        "storageResourceGroupName": {
+            "value": "rsResourceGroup"
+        },
+        "storageLocation": {
+            "value": "southeastasia"
+        },
+        "storageRoleUniqueId": {
+            "value": "cec4173f-aff3-4410-8920-a7b36783b028"
+        },
+        "isNewStorageAccount": {
+            "value": false
+        },
+        "isNewFileSystemOnly": {
+            "value": false
+        },
+        "storageAccessTier": {
+            "value": "Hot"
+        },
+        "storageAccountType": {
+            "value": "Standard_RAGRS"
+        },
+        "storageSupportsHttpsTrafficOnly": {
+            "value": true
+        },
+        "storageKind": {
+            "value": "StorageV2"
+        },
+        "storageIsHnsEnabled": {
+            "value": true
+        },
+        "userObjectId": {
+            "value": "79ebd23e-2c91-4446-860f-aa087fa12bb4"
+        },
+        "setSbdcRbacOnStorageAccount": {
+            "value": false
+        }
+    }
+}

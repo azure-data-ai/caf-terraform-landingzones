@@ -1,0 +1,28 @@
+# my defined variables
+
+variable "vnet_address_space" {
+  default = "10.10.128.0/24"
+}
+
+variable "private_subnet_prefix" {
+  default = "10.10.128.64/27"
+}
+
+variable "private_subnet_service_endpoints" {
+  default = "Microsoft.Storage"
+}
+
+variable "resource-group-name" {
+  default = "caf-prototype-rg"
+}
+
+variable "region" {
+  default = "southeastasia"
+}
+variable "environment" {
+  default = "Dev"
+}
+
+variable "country" {
+  default = "Singapore"
+}

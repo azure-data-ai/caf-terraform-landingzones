@@ -1,0 +1,4 @@
+resource-group-name = "caf-prototype-rg"
+region = "southeastasia"
+environment = "Dev"
+country = "Singapore"

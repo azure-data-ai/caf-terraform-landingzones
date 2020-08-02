@@ -1,33 +1,52 @@
 provider "azurerm" {
-  version = "~>2.11.0"
   features {}
 }
 
 terraform {
-    backend "azurerm" {
+  backend "azurerm" {
+  }
+  required_providers {
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "~>0.4.3"
     }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>2.20.0"
+    }
+  }
+  required_version = ">= 0.13"
 }
 
-locals {
-  landingzone_tag          = {
-    "landingzone" = basename(abspath(path.module))
+data "terraform_remote_state" "landingzone_networking" {
+  backend = "azurerm"
+  config = {
+    storage_account_name = var.lowerlevel_storage_account_name
+    container_name       = var.workspace
+    resource_group_name  = var.lowerlevel_resource_group_name
+    key                  = var.tfstate_landingzone_networking
   }
-  tags                = merge(var.tags, local.landingzone_tag)
 }
 
 data "terraform_remote_state" "landingzone_caf_foundations" {
   backend = "azurerm"
   config = {
-    storage_account_name  = var.lowerlevel_storage_account_name
-    container_name        = var.workspace
-    key                   = "landingzone_caf_foundations.tfstate"
-    resource_group_name   = var.lowerlevel_resource_group_name
+    storage_account_name = var.lowerlevel_storage_account_name
+    container_name       = var.workspace
+    resource_group_name  = var.lowerlevel_resource_group_name
+    key                  = var.tfstate_landingzone_caf_foundations
   }
 }
 
-locals {  
-    prefix                      = data.terraform_remote_state.landingzone_caf_foundations.outputs.prefix
-    caf_foundations_accounting  = data.terraform_remote_state.landingzone_caf_foundations.outputs.blueprint_foundations_accounting 
-    caf_foundations_security    = data.terraform_remote_state.landingzone_caf_foundations.outputs.blueprint_foundations_security
-    global_settings             = data.terraform_remote_state.landingzone_caf_foundations.outputs.global_settings 
+locals {
+  landingzone_tag = {
+    "landingzone" = basename(abspath(path.module))
+  }
+
+  global_settings = data.terraform_remote_state.landingzone_caf_foundations.outputs.global_settings
+
+  prefix                     = local.global_settings.prefix
+  tags                       = merge(var.tags, local.landingzone_tag, { "environment" = local.global_settings.environment })
+  caf_foundations_accounting = data.terraform_remote_state.landingzone_caf_foundations.outputs.foundations_accounting
+  vnets                      = data.terraform_remote_state.landingzone_networking.outputs.vnets
 }

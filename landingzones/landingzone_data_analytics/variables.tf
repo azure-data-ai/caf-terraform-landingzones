@@ -1,36 +1,47 @@
 # Map of the remote data state
-variable "lowerlevel_storage_account_name" {}
-variable "lowerlevel_container_name" {}
-variable "lowerlevel_key" {}                  # Keeping the key for the lower level0 access
-variable "lowerlevel_resource_group_name" {}
-variable "workspace" {}
-variable "tags" {
-    type = map
-    default = {
-        "environment": "DEV"
-        "project"    : "my_analytics_project"
-    }
+variable lowerlevel_storage_account_name {}
+variable lowerlevel_container_name {}
+variable lowerlevel_key {} # Keeping the key for the lower level0 access
+variable lowerlevel_resource_group_name {}
+variable workspace {}
+variable tfstate_landingzone_networking {
+  description = "(Optional) Name of the Terraform state for the networking landing zone"
+  default     = "landingzone_networking.tfstate"
 }
 
-##----Rahul-----
-
-variable "shared_services_vnet" {
- description = "network object"
+variable tfstate_landingzone_caf_foundations {
+  description = "(Optional) Name of the Terraform state for the caf foundations landing zone"
+  default     = "landingzone_caf_foundations.tfstate"
 }
 
-variable "vm_config" {
-    description = "Virtual Machine Configuration"
+variable tags {
+  description = "(Optional) Tags for the landing zone"
+  type        = map
+  default = {
+    "environment" : "DEV"
+    "project" : "my_analytics_project"
+  }
 }
 
-variable "akv_config" {
-  description = "(Required) Key Vault Configuration Object"
+variable vm_configs {
+  description = "(Required) Virtual Machine Configuration objects"
+  default = {}
 }
 
-variable "datalake_config" {}
+variable datalake_configs {
+  description = "(Required) Data Lake Configuration objects"
+  default = {}
+}
 
-variable "aml_config" {}
+variable aml_configs {
+  description = "(Required) Machine learning Configuration objects"
+  default = {}
+}
 
-variable "synapse_config" {}
+variable synapse_configs {
+  description = "(Required) Synapse Configuration objects"
+  default = {}
+}
 
-
-
+variable landingzone_tag {
+}
